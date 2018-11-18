@@ -19,11 +19,11 @@ class Api extends REST_Controller
         ];
         //load config file & overwrite config item
         $this->config->load('rest', TRUE);
-        $this->config->item('rest_valid_logins');
-        $this->config->set_item('rest_valid_logins', $auth_data);
-        // $this->config->set_item('rest_valid_logins', array_merge(
-        //     $this->config->item('rest_valid_logins'), $auth_data
-        // ));
+        //$this->config->item('rest_valid_logins');
+        //$this->config->set_item('rest_valid_logins', $auth_data);
+        $this->config->set_item('rest_valid_logins', array_merge(
+            $this->config->item('rest_valid_logins'), $auth_data
+        ));
         $this->rest_config = $this->config->item('rest_valid_logins');
     }
 
@@ -33,6 +33,7 @@ class Api extends REST_Controller
          
         if($users)
         {
+            print_r($this->rest_config);
             $this->response($users, 200);
         }
  
