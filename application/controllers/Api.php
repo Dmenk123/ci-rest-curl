@@ -33,7 +33,7 @@ class Api extends REST_Controller
          
         if($users)
         {
-            print_r($this->rest_config);
+            //print_r($this->rest_config);
             $this->response($users, 200);
         }
  

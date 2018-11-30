@@ -17,12 +17,13 @@ class Consume_api extends CI_controller
 		echo $url;
 	}
 
-	function get_users_native_curl()
+	/*function get_users_native_curl()
 	{ 
 	    // Alternative JSON version
 	    // $url = 'http://twitter.com/statuses/update.json';
 	    // Set up and execute the curl process
-	    $url = base_url('/api/users');
+	    // $url = base_url('/api/users');
+	    $url = 'http://localhost/ci-restlib/api/users/all';
 	    $ch = curl_init();
 	    // curl_setopt($ch, CURLOPT_URL, 'http://localhost/restserver/index.php/example_api/user/id/1/format/json');
 	    curl_setopt($ch, CURLOPT_URL, $url);
@@ -30,6 +31,41 @@ class Consume_api extends CI_controller
 	    // Optional, delete this line if your API is open
 	    curl_setopt($ch, CURLOPT_USERPWD, $this->username . ':' . $this->password);
 	     
+	    $buffer = curl_exec($ch);
+	    curl_close($ch);
+	    
+	    //menerjemahkan string JSON. Dengan kata lain, mengubah string JSON menjadi variabel PHP.
+	    $result = json_decode($buffer, true);
+	 	
+	    if(isset($result->status) && $result->status != 'success')
+	    {
+	        echo 'Terjadi Kesalahan : '.$result->error;
+	    }
+	    else
+	    {
+	    	echo json_encode($result);
+	    }
+	}*/
+
+	function get_users_native_curl()
+	{ 
+	    // Alternative JSON version
+	    // $url = 'http://twitter.com/statuses/update.json';
+	    // Set up and execute the curl process
+	    // $url = base_url('/api/users');
+	    // $url = 'http://localhost/ci-restlib/api/users/all';
+	    $url = 'http://localhost/ci-restlib/api/articles/all';
+	    $apiKey = '123456';
+	    $ch = curl_init();
+	    // curl_setopt($ch, CURLOPT_URL, 'http://localhost/restserver/index.php/example_api/user/id/1/format/json');
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+	    // Optional, delete this line if your API is open
+	    //curl_setopt($ch, CURLOPT_USERPWD, $this->username . ':' . $this->password);
+	    // Optional, delete this line if your API is not send data api key in header
+	    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'X-API-KEY: ' . $apiKey
+		));
 	    $buffer = curl_exec($ch);
 	    curl_close($ch);
 	    
